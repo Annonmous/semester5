@@ -153,16 +153,16 @@ const Header = () => {
                   }
                   <ul className='flex flex-col px-4 py-2 text-textColor gap-8 '>
                     <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
-                     onClick={ ()=>{setIsMenu(false)}} >
+                      onClick={() => { setIsMenu(false) }} >
                       Home</li>
                     <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
-                    onClick={ ()=>{setIsMenu(false)}} >
+                      onClick={() => { setIsMenu(false) }} >
                       Menu</li>
                     <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
-                     onClick={ ()=>{setIsMenu(false)}} >
+                      onClick={() => { setIsMenu(false) }} >
                       About</li>
                     <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
-                    onClick={ ()=>{setIsMenu(false)}} >
+                      onClick={() => { setIsMenu(false) }} >
                       Contact Us</li>
                   </ul>
 

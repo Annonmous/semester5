@@ -10,10 +10,12 @@ import { MdShoppingBasket, MdAdd, MdLogout } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../context/StateProvider'
 import { actionType } from '../context/reducer'
+
+
 const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const [{ user }, dispatch] = useStateValue()
+  const [{ user,cartShow,cartItems }, dispatch] = useStateValue()
   const [IsMenu, setIsMenu] = React.useState(false)
 
   const login = async () => {
@@ -40,6 +42,14 @@ const Header = () => {
       user: null
     })
   }
+
+  const showCart=()=>{
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: !cartShow
+    })
+
+  }
   return (
     <>
       <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 ">
@@ -62,11 +72,14 @@ const Header = () => {
               <li className='text-base text-headingColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Contact Us</li>
             </motion.ul>
 
-            <div className='relative flex items-center justify-center'>
+            <div className='relative flex items-center justify-center' onClick={showCart}>
               <MdShoppingBasket className='text-textColor text-2xl ml-8 cursor-pointer' />
+
+              {cartItems && cartItems.length > 0 &&(
               <div className=' absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBd flex items-center justify-center'>
-                <p className='text-sm text-white font-semibold'>1 </p>
-              </div>
+              <p className='text-sm text-white font-semibold'>{cartItems.length}</p>
+            </div>
+            )} 
             </div>
 
             <div className='relative'>
@@ -105,15 +118,19 @@ const Header = () => {
             </div>
           </div>
         </div>
+
         {/* Mobile */}
         <div className='flex items-center justify-between md:hidden w-full h-full '>
 
 
-          <div className='relative flex items-center justify-center'>
+          <div className='relative flex items-center justify-center'onClick={showCart}>
             <MdShoppingBasket className='text-textColor text-2xl ml-8 cursor-pointer' />
-            <div className=' absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBd flex items-center justify-center'>
-              <p className='text-sm text-white font-semibold'>1 </p>
+            {cartItems && cartItems.length >0 &&(
+              <div className=' absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBd
+               flex items-center justify-center'>
+              <p className='text-sm text-white font-semibold'>{cartItems.length}</p>
             </div>
+            )}
           </div>
 
           <Link to='/' className="flex items-center gap-2">
@@ -152,16 +169,16 @@ const Header = () => {
                     )
                   }
                   <ul className='flex flex-col px-4 py-2 text-textColor gap-8 '>
-                    <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
+                    <li className='text-base text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
                       onClick={() => { setIsMenu(false) }} >
                       Home</li>
-                    <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
+                    <li className='text-base  text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
                       onClick={() => { setIsMenu(false) }} >
                       Menu</li>
-                    <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
+                    <li className='text-base  text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
                       onClick={() => { setIsMenu(false) }} >
                       About</li>
-                    <li className='text-base text-headingColor text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
+                    <li className='text-base  text-textColor :hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'
                       onClick={() => { setIsMenu(false) }} >
                       Contact Us</li>
                   </ul>

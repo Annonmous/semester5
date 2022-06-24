@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useStateValue } from './context/StateProvider';
 import { actionType } from './context/reducer';
 
+
 function App() {
 
   const [{foodItems},dispatch]=useStateValue()

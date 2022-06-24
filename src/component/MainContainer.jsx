@@ -5,13 +5,14 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import RowContainer from './RowContainer'
 import { useStateValue } from '../context/StateProvider'
 import MenuContainer from './MenuContainer'
+import CardContainer from './CardContainer'
 
 const MainContainer = () => {
 
-  const [{ foodItems }, dispatch] = useStateValue()
-  const [scrollValue,setScrollValue]=useState(0)
+  const [{ foodItems, cartShow }, dispatch] = useStateValue()
+  const [scrollValue, setScrollValue] = useState(0)
 
-  useEffect(()=>{},[scrollValue])
+  useEffect(() => { }, [scrollValue,cartShow])
 
   return (
     <div className='w-full flex h-auto  flex-col items-center justify-center'>
@@ -31,7 +32,7 @@ const MainContainer = () => {
               whileTap={{ scale: 0.75 }}
               className='w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 cursor-pointer
                hover:shadow-lg  flex items-center justify-center'
-            onClick={()=>setScrollValue(-500)}
+              onClick={() => setScrollValue(-500)}
             >
               <MdChevronLeft className='text-lg text-white' />
             </motion.div>
@@ -39,19 +40,25 @@ const MainContainer = () => {
               whileTap={{ scale: 0.75 }}
               className='w-8 h-8 rounded-lg bg-orange-300 hover:bg-orange-500 cursor-pointer transition-all 
             duration-100 ease-in-out hover:shadow-lg  flex items-center justify-center'
-            onClick={()=>setScrollValue(500)}
+              onClick={() => setScrollValue(500)}
             >
               <MdChevronRight className='text-lg text-white' />
             </motion.div>
           </div>
         </div>
         <RowContainer
-        scrollValue={scrollValue}
+          scrollValue={scrollValue}
           flag={true}
           data={foodItems?.filter((n) => n.category === "fruits")} />
       </section>
 
-      <MenuContainer/>
+      <MenuContainer />
+
+
+      { cartShow &&(
+        
+        <CardContainer />
+      )}
     </div>
   )
 }
